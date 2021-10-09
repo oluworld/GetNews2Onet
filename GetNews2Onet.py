@@ -137,6 +137,9 @@ class MailExtractEML(MailExtractBase):
 class MailExtractCBracket(MailExtractBase):
 	def extract_srv_info(self, ll, dn, msgnum):
 		# this function actually depends on a numeric filename
+		if not msgnum[-4:].lower() == ".{c}":
+			return
+		
 		assert is_integer(msgnum[:-4])
 		try:
 			lr  = LineReader (ll)
