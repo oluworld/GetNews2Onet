@@ -129,6 +129,7 @@ class OANM1_JOB_EXECUTOR:
 		self.read_cfg_file()
 	
 	def read_cfg_file(self):
+		l1, l2 = None, None
 		try:
 			# using strip instead of [:-1] fixes by-dirname-...^M bug
 			f = open ('OnetAddNewsgroupMessage.rc')
@@ -139,13 +140,14 @@ class OANM1_JOB_EXECUTOR:
 			f.close()
 		except :
 			l1, l2 = 'c:/_', 'e:/_onet/by-%s'
-		try:
-			f = open ('OnetAddNewsgroupMessage.rc', 'w')
-			f.write ('# message_store_root: ~/local/data/GetNewsX/\n')
-			f.write ('%s\n# oname_base: ~onet-storage/by-%%s\n%s\n' % (l1, l2))
-			f.close()
-		except:
-			print 'error writing config'
+		if l1 is None and l2 is None:
+			try:
+				f = open('OnetAddNewsgroupMessage.rc', 'w')
+				f.write('# message_store_root: ~/local/data/GetNewsX/\n')
+				f.write('%s\n# oname_base: ~onet-storage/by-%%s\n%s\n' % (l1, l2))
+				f.close()
+			except:
+				print 'error writing config'
 		self.msg_st_root = l1
 		self.onet_base   = l2
 	##	print 'msg_st_root', msg_st_root
