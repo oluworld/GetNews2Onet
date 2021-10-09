@@ -161,7 +161,7 @@ class MailExtractCBracket(MailExtractBase):
 			f1 = dumptextfile(MM+'.{M}')
 			f2 = ll      #dumptextfile(MM+'.{C}')
 			
-			return server, group, msgnum, f1, f2
+			return server, group_name, msgnum, f1, f2
 		finally:
 			del lr, msg
 
