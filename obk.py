@@ -194,7 +194,7 @@ def main():
 	#con._i=key
 	#go(con)
 	rr      = [ go(sd,con) for sd in xx ]
-	rr=rr
+	return rr
 
 class Controller(object):
 	def __init__(self, gg, O):
