@@ -121,6 +121,14 @@ def today_date():
 #
 #
 
+
+def split_on_equals(s):
+	n, v = string.split(s, '=', 1)
+	n = n.strip()
+	v = v.strip()
+	return n, v
+
+
 class OANM1_JOB_EXECUTOR:
 	def __init__(self, jm):
 		self.msg_st_root = ''
@@ -232,8 +240,8 @@ class OANM1_JOB_EXECUTOR:
 	
 		onet_obj=OnetObj()
 		onet_obj.set_dpy_name(dpyname)
-		for n,v in oix_attrs:
-			onet_obj.set_prop(n,v)
+		x = [split_on_equals(y) for y in oix_attrs]
+		[onet_obj.set_prop(n, v) for (n, v) in x]
 		out = """<?xml version="1.0"?>
 <onet_file version="2" brid="%s">
 	<type simple-mime="image/jpeg" complex-mime="image/jpeg" />
