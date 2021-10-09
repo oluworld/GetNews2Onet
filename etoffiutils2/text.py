@@ -10,8 +10,8 @@ def getQuoted(line):
 def SplitLine(line):
 	name = ''
 	value = ''
-
-	if line[:1] == '"':
+	
+	if line[:1] in ('"', "'"):
 		name, value = getQuoted(line)
 	else:
 		while line[:1] not in (' ', '\t') and len(line):
