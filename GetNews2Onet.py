@@ -85,10 +85,10 @@ class MailExtractEML(MailExtractBase):
 			lr  = LineReader (ll)
 			msg = Message (lr)
 			
-			subj = msg.getheader ("subject")
-		#	print 67, msg.headers
-		#	qq = string.split(subj)
-			if subj == None:
+			subj = msg.getheader("subject")
+			#	print 67, msg.headers
+			#	qq = string.split(subj)
+			if subj is None:
 				raise WrongFormat
 		
 			# decode subject

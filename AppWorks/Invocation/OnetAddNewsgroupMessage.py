@@ -158,15 +158,15 @@ class OANM1_JOB_EXECUTOR:
 	
 	def execute(self, j):
 		print 'OnetAddNewsgroupMessage ======================================================='
-		print '== JOBID -->>',j.id,j.job_type
-	
-	#	print j.job_type
-	#	print_spec_list (j.spec_list)
-	
-		msg_lines = j.params[0]	
-		oix_attrs = j.params[1]	
-	
-		if msg_lines == None: 
+		print '== JOBID -->>', j.id, j.job_type
+		
+		#	print j.job_type
+		#	print_spec_list (j.spec_list)
+		
+		msg_lines = j.params[0]
+		oix_attrs = j.params[1]
+		
+		if msg_lines is None:
 			log("719: skip null message")
 			return
 			
