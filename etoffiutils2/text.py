@@ -22,10 +22,12 @@ def SplitLine(line):
 
 	if value[:1] in ('"', "'"):
 		value = value[1:-1]
-#	else:
-#		value = value[1:]
-		
-	return (name, value)
+	#	else:
+	#		value = value[1:]
+	
+	return name, value
+
+
 def xSplitLine(line):
 	name = ''
 	value = ''
@@ -43,8 +45,7 @@ def xSplitLine(line):
 
 	if value[:1] in ('"', "'"):
 		value = value[1:-1]
-#	else:
-#		value = value[1:]
-		
-	return (name, value)
+	#	else:
+	#		value = value[1:]
 	
+	return name, value
