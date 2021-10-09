@@ -225,7 +225,8 @@ def checkRemoveEnd(instr, endwith):
 		rv=instr
 	return rv
 
-# from rfc822.py. thnaks Python!!
+
+# from rfc822.py. thanks Python!!
 def formatdate(timeval=None):
 	"""Returns time format preferred for Internet standards.
 
