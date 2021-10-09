@@ -80,7 +80,7 @@ class MailExtractNull(MailExtractBase):
 		raise WrongFormat()
 
 class MailExtractEML(MailExtractBase):
-	def _extract_srv_info (self, ll, dn, cur):
+	def extract_srv_info(self, ll, dn, cur):
 		try:
 			lr  = LineReader (ll)
 			msg = Message (lr)
@@ -135,7 +135,7 @@ class MailExtractEML(MailExtractBase):
 		return server, group, msgnum, f1, f2, qq
 
 class MailExtractCBracket(MailExtractBase):
-	def _extract_srv_info (self, ll, dn, msgnum):
+	def extract_srv_info(self, ll, dn, msgnum):
 		# this function actually depends on a numeric filename
 		assert is_integer(msgnum)
 		try:
