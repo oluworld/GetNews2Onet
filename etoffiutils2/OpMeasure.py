@@ -3,12 +3,13 @@ from etoffiutils2.pkg import xpmt, xmpta
 
 
 class OpMeasure:
-	def __init__(self,f,l,t,c):
-		self.f=f
-		self.l=l
-		self.t=t
-		self.c=c
-		self.d=time.clock()
+	def __init__(self, f, l, t, c):
+		self.f = f
+		self.l = l
+		self.t = t
+		self.c = c
+		self.d = time.clock()
+	
 	def startOp(self, each):
 		self.c += 1
 		
@@ -21,4 +22,4 @@ class OpMeasure:
 		                                                   time.clock() - self.d))
 	
 	def endOp(self):
-		self.d=time.clock()
+		self.d = time.clock()
