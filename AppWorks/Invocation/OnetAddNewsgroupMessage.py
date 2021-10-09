@@ -1,12 +1,11 @@
-from etoffiutils import quickWrite, b64_encode, qpi_encode, \
-	x2_encode, ensure_directory_present, true, false
-from AppWorks.Jobs import Job
-from AppWorks.Jobs.Misc import print_spec_list
-#from AppWorks.MMS.MailExtract import MailExtract
-from AppWorks.MMS import MailExtract as MailExtract_
-import time, string, os
+import os
+import string
+import time
+
+from AppWorks.MMS.MailExtract import MailExtract
 from AppWorks.Net.Onet import OnetObj
-MailExtract = MailExtract_.MailExtract
+from etoffiutils import quickWrite, b64_encode, qpi_encode, ensure_directory_present, true, false
+from etoffiutils2.text import getQuoted
 
 #
 # OnetAddNewsgroupMessage.py
@@ -91,15 +90,18 @@ def extract_info_from_msg (headers):
 			pass
 
 	try:
-		aa = h['from']
+		aa = h['from'].lstrip()
 	except KeyError:
 		raise Onet_EmptyMessage ()
 	author, author_email = '', ''
-	aa = aa.split()
-	if len(aa) == 2:
-		author, author_email = aa[0], aa[1]
+	if aa[0] in ('\"', "'"):
+		author, author_email = getQuoted(aa)
 	else:
-		author, author_email = aa[0][:aa[0].find('@')], aa[0]
+		aa = aa.split()
+		if len(aa) == 2:
+			author, author_email = aa[0], aa[1]
+		else:
+			author, author_email = aa[0][:aa[0].find('@')], aa[0]
 	msgid, date = (h['message-id'], h['date'])
 	try:
 		posting_host = h['nntp-posting-host']
