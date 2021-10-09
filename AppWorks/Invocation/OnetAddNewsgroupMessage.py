@@ -123,12 +123,12 @@ def today_date():
 
 class OANM1_JOB_EXECUTOR:
 	def __init__(self, jm):
-		self.read_cfg_file ()
-		
 		self.msg_st_root = ''
 		self.onet_base   = ''
 		
-	def read_cfg_file (self):
+		self.read_cfg_file()
+	
+	def read_cfg_file(self):
 		try:
 			# using strip instead of [:-1] fixes by-dirname-...^M bug
 			f = open ('OnetAddNewsgroupMessage.rc')
