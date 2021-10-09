@@ -60,7 +60,8 @@ class GetNews2Onet:
 			print '\t', e
 			print '================='
 	def translate_message(self, ll, dn, filename):
-		server, group, msgnum, f1, f2 = self.mem.get(filename)._extract_srv_info(ll, dn, filename)
+		extractor = self.mem.get(filename)
+		server, group, msgnum, f1, f2 = extractor.extract_srv_info(ll, dn, filename)
 		
 		# generate spectionary
 		spectionary = {}
@@ -70,7 +71,8 @@ class GetNews2Onet:
 		spectionary['options']    = 'save-headers extract-contents-in-shared delete-orig'
 		
 		# invoke message adding component
-		self.add_newsgroup_message (time.ctime(time.time()), spectionary, f1, f2)
+		extractor.add_newsgroup_message(time.ctime(time.time()), spectionary, f1, f2)
+
 
 class MailExtractNull(MailExtractBase):
 	def go(self, dn, each, cur, first, last):
