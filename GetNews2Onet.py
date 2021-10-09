@@ -14,7 +14,7 @@ class pException(Exception): pass
 
 def is_integer(s):
 	for each in s:
-		if not each in "1234567890":
+		if each not in "1234567890":
 			return false
 	return true
 
