@@ -253,6 +253,8 @@ def go1(sd,con,n):
 		con.resource_number += 1
 	try:
 		go1(sd,con,n+1)
+	except IndexError:
+		pass
 	except Exception, e:
 		print 100, 'error during operation >>', (sd,con,n), '<<', e 
 
