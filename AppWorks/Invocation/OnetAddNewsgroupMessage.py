@@ -234,7 +234,7 @@ class OANM1_JOB_EXECUTOR:
 		author, author_email, msgid, date, posting_host = extract_info_from_msg (headers)
 		keywords = ''
 		modelist = ''
-		storage_location = msgnum+'.msg'
+		storage_location = '%d.msg' % (msgnum,)
 		if "save-headers" not in l:
 			headers = None
 	
