@@ -217,6 +217,15 @@ class RecursionFlowControl: pass
 def go(sd,con):
 	try:
 		key  = [ os.path.join(sd, x ) for x in os.listdir(sd)] # TODO: create filenamesource
+		
+		# TODO Add support for .gitignore and .obkignore
+		cvs = os.path.join(sd, "CVS")
+		git = os.path.join(sd, ".git")
+		venv = os.path.join(sd, "venv")
+		if cvs in key: key.remove(cvs)
+		if git in key: key.remove(git)
+		if venv in key: key.remove(venv)
+		
 		con._i+=key
 		go1(None,con,0)
 	except RecursionFlowControl, rfc:
