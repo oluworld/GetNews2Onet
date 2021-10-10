@@ -21,6 +21,10 @@ class MailExtractBase:
 		o = self.executor.execute(jj)
 
 
+#class NullMessage(Exception):
+#	pass
+
+
 class MailExtractNull(MailExtractBase):
 	def go(self, dn, each, cur, first, last):
 		# print "** Null Format - either empty or yenc or directory"

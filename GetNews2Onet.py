@@ -6,10 +6,6 @@ from netapps.GetNews2Onet.GetNews2Onet import GetNews2Onet
 class pException(Exception): pass
 
 
-#class NullMessage(Exception):
-#	pass
-
-
 def main(args):
 	if len(args) > 1:
 		dn = args[1]
