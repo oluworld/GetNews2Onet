@@ -73,7 +73,10 @@ class GetNews2Onet:
 	
 	def translate_message(self, ll, dn, filename):
 		extractor = self.mem.get(filename)
-		server, group, msgnum, f1, f2 = extractor.extract_srv_info(ll, dn, filename)
+		res = extractor.extract_srv_info(ll, dn, filename)
+		if res is None:
+			return
+		server, group, msgnum, f1, f2 = res
 		
 		# generate spectionary
 		spectionary = {}
@@ -86,11 +89,20 @@ class GetNews2Onet:
 		extractor.add_newsgroup_message(time.ctime(time.time()), spectionary, f1, f2)
 
 
+#class NullMessage(Exception):
+#	pass
+
+
 class MailExtractNull(MailExtractBase):
 	def go(self, dn, each, cur, first, last):
 		# print "** Null Format - either empty or yenc or directory"
 		raise WrongFormat()
 
+	def extract_srv_info(self, ll, dn, filename):
+		""" @returns server, group, msgnum, f1, f2"""
+		#raise NullMessage, "Can't extract null message"
+		print >>sys.stderr, "Can't extract null message"
+	
 
 class EmlF1(object):
 	def __init__(self, f1):
