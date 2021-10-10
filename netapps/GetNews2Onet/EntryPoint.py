@@ -4,7 +4,7 @@ from etoffiutils2.OpMeasure import OpMeasure
 from netapps.GetNews2Onet.GetNews2Onet import GetNews2Onet
 
 
-def main(args):
+def logic(args):
 	if len(args) > 1:
 		dn = args[1]
 	else:
@@ -24,9 +24,27 @@ def main(args):
 		measure.endOp()
 
 
-def prof(args):
+def prof(args, filename):
 	import profile
-	profile.run('main(args)', 'fooprof')
+	# profile.run('import netapps;netapps.GetNews2Onet.EntryPoint.logic(args)', filename)
+	prof = profile.Profile()
+	prof.runcall(logic, (args,))
+	prof.dump_stats(filename)
 	import pstats
-	p = pstats.Stats('fooprof')
+	p = pstats.Stats(filename)
 	p.sort_stats('time').print_stats()  # 10)
+
+
+def main(args):
+	import argparse
+	parser = argparse.ArgumentParser(description='Convert GetNews to Onet.')
+	
+	parser.add_argument('-p', nargs=1, type=str, help="Profile the application into <filename>")
+	
+	a = parser.parse_args(args[1:])
+	
+	profile_it = a.p
+	if profile_it is not None:
+		prof(args, profile_it[0])
+	else:
+		logic(args)
