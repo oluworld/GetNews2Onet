@@ -311,7 +311,7 @@ class OANM1_JOB_EXECUTOR:
 				def out_file_str_to_fp(self, _1, out_file_name, fix_file_name, men, mode):
 					assert type(out_file_name) == type('')
 					filename = fix_file_name(out_file_name)
-					X = "%s/_shared/(%d)-%s" % (self.outdir, self.cur_msg_num, filename)
+					X = "%s/../_shared/(%d)-%s" % (self.outdir, self.cur_msg_num, filename)
 					# ~ print 67122, 'hfdsafbjdlfnfa', X
 					men.uudecode_set_file_name(X)
 					fp = self.GetOutFile(X)
