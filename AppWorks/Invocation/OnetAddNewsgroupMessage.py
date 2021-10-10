@@ -225,6 +225,7 @@ class OANM1_JOB_EXECUTOR:
 		fn_ = '%s/%s' % (fnX, msgnum)
 		ensure_directory_present(fnX + '/_onet')
 		ensure_directory_present(fnX + '/_shared')
+		ensure_directory_present(fn_ + '/_shared')
 		fn = '%s/%s' % (fn_, msgnum)
 		
 		# -------------------
