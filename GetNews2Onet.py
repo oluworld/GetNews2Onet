@@ -27,7 +27,7 @@ class MailExtractMultiplexer:
 
 class GetNews2Onet:
 	def __init__(self):
-		self.mem = MailExtractMultiplexer()
+		self.multiplexer = MailExtractMultiplexer()
 	
 	def do_file(self, dirname, filename):
 		fullname = '%s/%s' % (dirname, filename)
@@ -46,7 +46,7 @@ class GetNews2Onet:
 			print '================='
 	
 	def translate_message(self, ll, dn, filename):
-		extractor = self.mem.get(filename)
+		extractor = self.multiplexer.get(filename)
 		res = extractor.extract_srv_info(ll, dn, filename)
 		if res is None:
 			return
