@@ -155,7 +155,7 @@ class OANM1_JOB_EXECUTOR:
 			f.close()
 		except:
 			l1, l2 = 'c:/_', 'e:/_onet/by-%s'
-		if l1 is None and l2 is None:
+
 			try:
 				f = open('OnetAddNewsgroupMessage.rc', 'w')
 				f.write('# message_store_root: ~/local/data/GetNewsX/\n')
@@ -163,6 +163,10 @@ class OANM1_JOB_EXECUTOR:
 				f.close()
 			except:
 				print 'error writing config'
+				
+		assert l1 is not None
+		assert l2 is not None
+		
 		self.msg_st_root = l1
 		self.onet_base = l2
 	
