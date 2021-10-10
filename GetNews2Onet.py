@@ -67,7 +67,7 @@ class GetNews2Onet:
 			#			print e
 			print '** Message is empty'
 		except IOError, e:
-			print '== Error Decoding', each
+			print '== Error Decoding', filename
 			print '\t', e
 			print '================='
 	
