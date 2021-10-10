@@ -54,7 +54,7 @@ def ensure_clear_name(filename):
 		newfn = filename
 		i = 1
 		while os.path.isfile(newfn):
-			newfn = '%s.~%d~' % (newfn, i)
+			newfn = '%s.~%d~' % (filename, i)
 			i = i + 1
 		os.rename(filename, newfn)
 		assert os.path.isfile(newfn)
