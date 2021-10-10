@@ -50,8 +50,8 @@ class OnetObj:
 		self.putline(outfile, '<onet_file version="2" brid="%s">' % self.brid)
 		#~ outfile.incr_tabs()
 		self.putline(outfile, '<type simple-mime="image/jpeg" complex-mime="image/jpeg" />')
-		self.push_versions (outfile)
-		keywords, modelist, date, msgid = range (4)
+		self.push_versions(outfile)
+		keywords, modelist, date, msgid = '', '', '', ''
 		c = """
 	
 	<permissions order="allow, deny">
