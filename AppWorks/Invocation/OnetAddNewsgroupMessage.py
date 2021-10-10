@@ -132,6 +132,10 @@ def today_date():
 #
 
 
+#class WriteConflict(Exception):
+#	pass
+
+
 class OANM1_JOB_EXECUTOR:
 	def __init__(self, jm):
 		self.msg_st_root = ''
@@ -306,7 +310,10 @@ class OANM1_JOB_EXECUTOR:
 					# ~ print 67122, 'hfdsafbjdlfnfa', X
 					men.uudecode_set_file_name(X)
 					fp = self.GetOutFile(X)
-					assert not os.path.isfile(X)
+					if os.path.isfile(X):
+						ensure_clear_name(X)
+						#print 9885, "Won't overwrite file ", X
+						#raise WriteConflict, "Won't overwrite file " + X
 					try:
 						os.chmod(X, mode)
 					except OSError, e:
