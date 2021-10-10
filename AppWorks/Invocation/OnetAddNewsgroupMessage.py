@@ -286,7 +286,7 @@ class OANM1_JOB_EXECUTOR:
 	""" % (resid, dpyname, author, author_email, posting_host, today_date(),
 		   storage_location, keywords, modelist, date, cgi_escape(msgid), onet_obj.saved_properties
 		   )
-		if headers != None:
+		if headers is not None:
 			out += """		<property name="rfc822-header" author="user:GetNews" type="long_string" encoding="quoted-printable/cgi_escape">"""
 			out += qpi_encode(string.join(map(lambda x: cgi_escape(x), headers), '\n'))
 			out += """		</property>"""
