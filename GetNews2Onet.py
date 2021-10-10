@@ -92,6 +92,38 @@ class MailExtractNull(MailExtractBase):
 		raise WrongFormat()
 
 
+class EmlF1(object):
+	def __init__(self, f1):
+		x = string.split(f1, '\n')
+		self.f1 = filter(lambda x: x != '', x)
+	
+	def set_properties(self, onet_obj):
+		def split_on_colon(s):
+			n, v = string.split(s, ':', 1)
+			n = n.strip()
+			v = v.strip()
+			return n, v
+		
+		assert self.f1[0][0] == '/'
+		x = [split_on_colon(y) for y in self.f1[1:]]
+		[onet_obj.set_prop(n, v) for (n, v) in x]
+
+
+class CBracketF1(object):
+	def __init__(self, f1):
+		self.f1 = f1
+		
+	def set_properties(self, onet_obj):
+		def split_on_equals(s):
+			n, v = string.split(s, '=', 1)
+			n = n.strip()
+			v = v.strip()
+			return n, v
+		
+		x = [split_on_equals(y) for y in self.f1]
+		[onet_obj.set_prop(n, v) for (n, v) in x]
+
+
 class MailExtractEML(MailExtractBase):
 	def extract_srv_info(self, ll, dn, cur):
 		try:
@@ -114,7 +146,7 @@ class MailExtractEML(MailExtractBase):
 			f1 = base64_decodestring(string.join(f1))
 			f2 = string.split(base64_decodestring(string.join(f2, '\n')), '\n')
 			
-			return server, group, msgnum, f1, f2
+			return server, group, int(msgnum), EmlF1(f1), f2
 		finally:
 			del lr, msg
 	
@@ -176,7 +208,7 @@ class MailExtractCBracket(MailExtractBase):
 			f1 = dumptextfile(MM + '.{M}')
 			f2 = ll  # dumptextfile(MM+'.{C}')
 			
-			return server, group_name, msgnum, f1, f2
+			return server, group_name, msgnum, CBracketF1(f1), f2
 		finally:
 			del lr, msg
 
