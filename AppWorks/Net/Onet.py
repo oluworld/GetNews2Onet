@@ -7,6 +7,7 @@ class OnetObj:
 	
 	def __init__(self):
 		self.V = {}
+		self.saved_properties = ''
 
 	def add_version(self, version_id, dpyname, author_tuple, date, 
 		              storage_location):
@@ -19,7 +20,11 @@ class OnetObj:
 		self.brid = a_brid
 
 	def set_prop (self, n, v, st='string', ct='string', user='*'):
-		pass
+		self.saved_properties += """\
+<property name="%s" simple-type="%s" complex-type="%s">
+	%s
+</property>
+		""" % (n, st, ct, v) # TODO account for user
 
 	def putline (self, outfile, s):
 		outfile.write (s)
@@ -61,8 +66,8 @@ class OnetObj:
 	</property>
 	<property name="Message-ID" simple-type="string" complex-type="rfc822/message-id">
 		%s
-	</property></properties>
-	"""	% 	(keywords, modelist, date, (msgid))
+	</property>%s</properties>
+	"""	% 	(keywords, modelist, date, msgid, self.saved_properties)
 		self.putline(outfile, c)
 		self.putline(outfile, '</onet_file>')
 	
