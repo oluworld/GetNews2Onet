@@ -321,8 +321,10 @@ class OANM1_JOB_EXECUTOR:
 			quickWrite(filepath, [out], false)
 			
 			me2 = MailExtract_Special()
-			me2.set_outdir(fnX)
-			me2.cur_msg_num = int(msgnum)
+			dirname = os.path.join(fnX, str(msgnum))
+			me2.set_outdir(dirname)
+			ensure_directory_present(dirname)
+			me2.cur_msg_num = msgnum
 			me2.do_decode_lines(msg_lines)
 
 
