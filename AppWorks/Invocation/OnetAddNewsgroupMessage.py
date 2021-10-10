@@ -292,7 +292,8 @@ class OANM1_JOB_EXECUTOR:
 			out += """		</property>"""
 		out += """</properties>\n</file>\n"""
 		
-		if extract_contents != 2:
+		if true or extract_contents != 2:
+			fn = '%s/_onet/%d' % (fnX, msgnum)
 			quickWrite(fn + ".onet", [out], false)
 		
 		# --------------------
