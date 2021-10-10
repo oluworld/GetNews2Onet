@@ -274,9 +274,9 @@ class OANM1_JOB_EXECUTOR:
 	</property>
 	<property name="Message-ID" simple-type="string" complex-type="rfc822/message-id">
 		%s
-	</property>	
+	</property>%s
 	""" % (resid, dpyname, author, author_email, posting_host, today_date(),
-		   storage_location, keywords, modelist, date, cgi_escape(msgid)
+		   storage_location, keywords, modelist, date, cgi_escape(msgid), onet_obj.saved_properties
 		   )
 		if headers != None:
 			out += """		<property name="rfc822-header" author="user:GetNews" type="long_string" encoding="quoted-printable/cgi_escape">"""
