@@ -3,7 +3,7 @@ import sys
 import time
 
 from AppWorks.Invocation.OnetAddNewsgroupMessage import OANM1_JOB_EXECUTOR, Onet_EmptyMessage
-from etoffiutils import dumptextfile, true
+from etoffiutils import dumptextfile, true, false
 from netapps.GetNews2Onet.MailExtractors import MailExtractEML, MailExtractCBracket, MailExtractNull, WrongFormat, \
 	MexErrorEmpty
 
@@ -33,8 +33,9 @@ class GetNews2Onet:
 		fullname = '%s/%s' % (dirname, filename)
 		try:
 			ll = dumptextfile(fullname, true)
-			self.translate_message(ll, dirname, filename)
-			os.unlink(fullname)
+			don = self.translate_message(ll, dirname, filename)
+			if don != false:
+				os.unlink(fullname)
 		except WrongFormat, e:
 			print '** wrong format'
 		except Onet_EmptyMessage, e:
@@ -47,6 +48,9 @@ class GetNews2Onet:
 	
 	def translate_message(self, ll, dn, filename):
 		extractor = self.multiplexer.get(filename)
+		if isinstance(extractor, MailExtractNull):
+			return false
+		
 		res = extractor.extract_srv_info(ll, dn, filename)
 		if res is None:
 			return
