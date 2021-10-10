@@ -9,6 +9,10 @@ from etoffiutils import dumptextfile, false, true
 from etoffiutils2.LineReader import LineReader
 
 
+class MexErrorEmpty:
+	def __init__(self, field):
+		self.field = field
+
 class MailExtractBase:
 	def __init__(self, executor):
 		self.executor = executor
@@ -86,7 +90,9 @@ class MailExtractEML(MailExtractBase):
 			# decode message
 			##	print 99, f1, f2
 			assert f1 != []
-			assert f2 != []
+			if f2 == []:
+				return MexErrorEmpty('f2')
+			
 			f1 = base64_decodestring(string.join(f1))
 			f2 = string.split(base64_decodestring(string.join(f2, '\n')), '\n')
 			

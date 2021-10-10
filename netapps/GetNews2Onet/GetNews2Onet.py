@@ -1,9 +1,11 @@
 import os
+import sys
 import time
 
 from AppWorks.Invocation.OnetAddNewsgroupMessage import OANM1_JOB_EXECUTOR, Onet_EmptyMessage
 from etoffiutils import dumptextfile, true
-from netapps.GetNews2Onet.MailExtractors import MailExtractEML, MailExtractCBracket, MailExtractNull, WrongFormat
+from netapps.GetNews2Onet.MailExtractors import MailExtractEML, MailExtractCBracket, MailExtractNull, WrongFormat, \
+	MexErrorEmpty
 
 
 class MailExtractMultiplexer:
@@ -47,6 +49,9 @@ class GetNews2Onet:
 		extractor = self.multiplexer.get(filename)
 		res = extractor.extract_srv_info(ll, dn, filename)
 		if res is None:
+			return
+		if isinstance(res, MexErrorEmpty):
+			print >>sys.stderr, "Message is empty "+res.field
 			return
 		server, group, msgnum, f1, f2 = res
 		
