@@ -251,7 +251,7 @@ class MailExtract:
 			print 'TODO: elimnate errors l217'
 			print e
 			
-	def	do_decode_lines(self, source, k=0):
+	def do_decode_lines(self, source, k=0):
 			self.namedonly = false # TODO: fix this
 			if k == 0:
 				source = LineReaderN(source)
