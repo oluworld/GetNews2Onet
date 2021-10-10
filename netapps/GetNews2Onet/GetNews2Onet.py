@@ -68,3 +68,20 @@ class GetNews2Onet:
 		
 		# invoke message adding component
 		extractor.add_newsgroup_message(time.ctime(time.time()), spectionary, f1, f2)
+
+		fullname = '%s/%s' % (dn, filename)
+		
+		def delete_if_exists(filename):
+			if os.path.exists(filename):
+				os.unlink(filename)
+				return true
+			else:
+				return false
+		
+		if isinstance(extractor, MailExtractCBracket):
+			filenamex = fullname[:-4]
+			if not delete_if_exists(filenamex+".{M}"):
+				delete_if_exists(filenamex + ".{m}")
+			# if not delete_if_exists(filenamex+".{C}"):
+			# 	delete_if_exists(filenamex + ".{c}")
+
