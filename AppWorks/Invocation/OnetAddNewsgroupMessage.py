@@ -317,7 +317,8 @@ class OANM1_JOB_EXECUTOR:
 					ensure_clear_name(filename)
 					return MailExtract.GetOutFile(self, filename)
 			
-			quickWrite(fnX + "/_onet/" + msgnum + ".onet", [out], false)
+			filepath = os.path.join(fnX, "_onet", str(msgnum) + ".onet")
+			quickWrite(filepath, [out], false)
 			
 			me2 = MailExtract_Special()
 			me2.set_outdir(fnX)
